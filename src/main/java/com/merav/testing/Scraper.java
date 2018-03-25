@@ -1,12 +1,9 @@
 package com.merav.testing;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -24,8 +21,6 @@ public class Scraper {
     private final static int NUMBER_OF_PAGES = 5;
     private final static int NUMBER_OF_RESULTS_PER_PAGE = 10;
 
-    private final static Logger LOGGER = Logger.getLogger(Scraper.class);
-
     private static WebDriver driver = null;
 
     private static List<WebElement> titles = null;
@@ -39,6 +34,15 @@ public class Scraper {
     private static long start=0, finish=0, totalTime=0;
 
     public static void main( String[] args ) {
+
+        String os = System.getProperty("os.name").toLowerCase();
+
+        if(os.contains("mac")){
+            System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"/chromedriver");
+        }
+        else if(os.contains("win")){
+            System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"\\chromedriver.exe");
+        }
 
         Scraper scraper = new Scraper();
         scraper.getDataFromWebSiteAndStoreInDB();
@@ -60,7 +64,7 @@ public class Scraper {
 
         finish = System.currentTimeMillis();
         totalTime = finish - start;
-        System.out.println("Total Time for search query in ms - "+totalTime);
+
 
         allTitlesStrings = new ArrayList<>();
         allDescriptionStrings = new ArrayList<>();
@@ -70,6 +74,9 @@ public class Scraper {
         allStarsStrings = new ArrayList<>();
 
         //Page1
+        System.out.println("Page number 1");
+        System.out.println("***************");
+        System.out.println("Total Time for search query in ms - "+totalTime);
         getAllDataFromAPage();
         //verify each URL is valid (non 404), I don't fail the application if it is failing (hence it's verify and not assert)
         verifyTitlesURL();
@@ -102,19 +109,6 @@ public class Scraper {
 
         driver.close();
         driver.quit();
-    }
-    private void waitForPageLoad() {
-
-        Wait<WebDriver> wait = new WebDriverWait(driver, 30);
-        wait.until(new Function<WebDriver, Boolean>() {
-            public Boolean apply(WebDriver driver) {
-                System.out.println("Current Window State       : "
-                        + String.valueOf(((JavascriptExecutor) driver).executeScript("return document.readyState")));
-                return String
-                        .valueOf(((JavascriptExecutor) driver).executeScript("return document.readyState"))
-                        .equals("complete");
-            }
-        });
     }
     private static void getAllDataFromAPage(){
 
@@ -278,7 +272,7 @@ public class Scraper {
             url = it.next().getAttribute("href");
 
             if ((url == null)||(url.length() == 0)) { //null or empty
-                LOGGER.error("URL is not initialized correctly or empty");
+                System.out.println("URL is not initialized correctly or empty");
                 continue;
             }
 
