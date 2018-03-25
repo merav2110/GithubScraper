@@ -21,7 +21,7 @@ public class MySQLConnectorImpl implements  MySQLConnector{
         System.out.println("MySQL JDBC Driver Registered!");
         try {
             connection = DriverManager
-                    .getConnection("jdbc:mysql://127.0.0.1:3306/results", "root", "skyAreBlue123");
+                    .getConnection("jdbc:mysql://0.0.0.0:3306/results", "root", "skyAreBlue123");
 
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console");
