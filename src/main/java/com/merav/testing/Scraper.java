@@ -236,27 +236,27 @@ public class Scraper {
 
         System.out.println("number of descrpition "+allDescriptionStrings.size());
         for(String str: allDescriptionStrings){
-    //        System.out.println("Description "+str);
+            System.out.println("Description "+str);
         }
 
         System.out.println("number of tags "+allTagsStrings.size());
         for(String str: allTagsStrings){
-     //       System.out.println("Tags "+str);
+            System.out.println("Tags "+str);
         }
 
         System.out.println("number of times "+allTimesStrings.size());
         for(String str: allTimesStrings){
-      //      System.out.println("times "+str);
+            System.out.println("times "+str);
         }
 
         System.out.println("number of langs "+allLanguagesStrings.size());
         for(String str: allLanguagesStrings){
-     //       System.out.println("langs "+str);
+            System.out.println("langs "+str);
         }
 
         System.out.println("number of stars "+allStarsStrings.size());
         for(String str: allStarsStrings) {
-            //       System.out.println("stars "+str);
+            System.out.println("stars "+str);
         }
     }
 

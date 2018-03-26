@@ -22,7 +22,7 @@ public class MySQLConnectorImpl implements  MySQLConnector{
         System.out.println("Accessing jdbc:mysql://localhost:3306/results");
         try {
             connection = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306", "root", "skyAreBlue123");
+                    .getConnection("jdbc:mysql://localhost:3306/results", "root", "skyAreBlue123");
 
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console");
